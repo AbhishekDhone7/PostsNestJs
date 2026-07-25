@@ -33,6 +33,6 @@ import jwtConfig from './config/jwt.config';
     ConfigModule.forFeature(jwtConfig),
     JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
-  exports: [AuthService, HashingProvider],
+  exports: [AuthService, HashingProvider, JwtModule, ConfigModule],
 })
 export class AuthModule {}
