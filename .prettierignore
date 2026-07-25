@@ -1,0 +1,9 @@
+# Generated files
+index.html
+documentation/
+dist/
+node_modules/
+
+# Build and config
+*.min.js
+*.min.css

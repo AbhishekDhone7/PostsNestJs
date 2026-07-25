@@ -58,12 +58,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-
 ## Stay in touch
 
 - Author - [Abhishek Dhone](abhidhone1@gmail.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
-
 
 ## License
 
