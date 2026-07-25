@@ -8,6 +8,7 @@ import {
   Body,
   ParseIntPipe,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
@@ -29,10 +30,12 @@ import {
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import { ApiErrorResponseDto } from '../common/dtos/api-error-response.dto';
+import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
 
 /** Public user-management controller for the `/users` domain. Endpoint decorators define validation and documented HTTP responses; no authorization guard is currently applied. */
 @Controller('users')
 @ApiTags('Users')
+// @UseGuards(AccessTokenGuard) //! for make entire controler use Gurds
 export class UsersController {
   constructor(
     // Injecting Users Service
@@ -124,6 +127,7 @@ export class UsersController {
    * @param createManyUsersDto Validated user collection.
    * @returns Persisted users when the transaction commits.
    */
+  @UseGuards(AccessTokenGuard)
   @Post('create-many')
   @ApiOperation({
     summary: 'Create multiple users',
