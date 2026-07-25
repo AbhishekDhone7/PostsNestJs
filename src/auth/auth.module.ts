@@ -1,4 +1,4 @@
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { Module, forwardRef } from '@nestjs/common';
 
 import { AuthController } from './auth.controller';

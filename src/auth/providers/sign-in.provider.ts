@@ -54,7 +54,7 @@ export class SignInProvider {
    */
   public async signIn(signInDto: SignInDto) {
     // find user by email ID
-    let user = await this.usersService.findOneByEmail(signInDto.email);
+    const user = await this.usersService.findOneByEmail(signInDto.email);
     // Throw exception if user is not found
     // Above | Taken care by the findInByEmail method
 
