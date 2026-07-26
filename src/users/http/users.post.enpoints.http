@@ -1,15 +1,15 @@
-POST http://localhost:3000/users
+POST http://localhost:5000/users
 Content-Type: application/json
 
 {
   "firstName": "Mark",
   "lastName": "Doe",
-  "email": "mark@doe.com",
+  "email": "markaszxczdsfa@doe.com",
   "password": "Password123#"
 }
 
 
-POST http://localhost:3000/users/create-many
+POST http://localhost:5000/users/create-many
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsImVtYWlsIjoiYWJoaTExMUBnbWFpbC5jb20iLCJpYXQiOjE3ODQ5NjU4OTAsImV4cCI6MTc4NDk2OTQ5MCwiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.tzzmeP8Qn1ORALpA7Hm3JulCqbG5CYZlAbSSCWdVcKI
 

@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   DefaultValuePipe,
   UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
@@ -31,6 +32,8 @@ import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import { ApiErrorResponseDto } from '../common/dtos/api-error-response.dto';
 import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
+import { Auth } from 'src/auth/decorator/auth.decorator';
+import { AuthType } from 'src/auth/enums/auth-type-enum';
 
 /** Public user-management controller for the `/users` domain. Endpoint decorators define validation and documented HTTP responses; no authorization guard is currently applied. */
 @Controller('users')
@@ -98,6 +101,8 @@ export class UsersController {
    * @returns The persisted user entity.
    */
   @Post()
+  // @SetMetadata('authType', 'none') //! remove guard
+  @Auth(AuthType.None)
   @ApiOperation({
     summary: 'Create a user',
     description:

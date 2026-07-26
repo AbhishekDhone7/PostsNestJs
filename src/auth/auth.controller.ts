@@ -13,6 +13,8 @@ import { AuthService } from './providers/auth.service';
 import { SignInDto } from './dtos/signin.dto';
 import { SignInResponseDto } from './dtos/signin-response.dto';
 import { ApiErrorResponseDto } from '../common/dtos/api-error-response.dto';
+import { Auth } from './decorator/auth.decorator';
+import { AuthType } from './enums/auth-type-enum';
 
 /**
  * Public credential-exchange controller for the `POST /auth` route.
@@ -62,6 +64,7 @@ export class AuthController {
     description: 'The server could not validate the credentials.',
     type: ApiErrorResponseDto,
   })
+  @Auth(AuthType.None)
   public signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto);
   }
