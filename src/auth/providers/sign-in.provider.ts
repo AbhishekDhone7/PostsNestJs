@@ -12,6 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import jwtConfig from '../config/jwt.config';
 import { ConfigType } from '@nestjs/config';
 import { ActiveUserData } from '../interfaces/active-user.interface';
+import { GenerateTokensProvider } from './generate-tokens.provider';
 
 /**
  * Executes the credential verification and JWT issuance workflow.
@@ -33,16 +34,7 @@ export class SignInProvider {
      */
     private readonly hashingProvider: HashingProvider,
 
-    /**
-     * Inject jwtService
-     */
-    private readonly jwtService: JwtService,
-
-    /**
-     * Inject jwtConfiguration
-     */
-    @Inject(jwtConfig.KEY)
-    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
+    private readonly grnerateTokenProvider: GenerateTokensProvider,
   ) {}
 
   /**
@@ -77,23 +69,6 @@ export class SignInProvider {
       throw new UnauthorizedException('Password does not match');
     }
 
-    // Generate access token
-    const accessToken = await this.jwtService.signAsync(
-      {
-        sub: user.id,
-        email: user.email,
-      } as ActiveUserData,
-      {
-        audience: this.jwtConfiguration.audience,
-        issuer: this.jwtConfiguration.issuer,
-        secret: this.jwtConfiguration.secret,
-        expiresIn: this.jwtConfiguration.accessTokenTtl,
-      },
-    );
-
-    // Return Access token
-    return {
-      accessToken,
-    };
+    return await this.grnerateTokenProvider.generateTokens(user);
   }
 }
