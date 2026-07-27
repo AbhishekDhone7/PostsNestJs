@@ -7,10 +7,11 @@ import { PostsService } from './providers/posts.service';
 import { TagsModule } from 'src/tags/tags.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from 'src/users/users.module';
+import { CreatePostsProvider } from './providers/create-posts.provider';
 
 @Module({
   controllers: [PostsController],
-  providers: [PostsService],
+  providers: [PostsService, CreatePostsProvider],
   imports: [
     UsersModule,
     TagsModule,

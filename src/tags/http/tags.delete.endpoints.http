@@ -1,5 +1,5 @@
-DELETE http://localhost:3000/tags
+DELETE http://localhost:5000/tags
   ?id=6
 
-DELETE http://localhost:3000/tags/soft-delete
+DELETE http://localhost:5000/tags/soft-delete
   ?id=7

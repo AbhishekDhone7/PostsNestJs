@@ -9,7 +9,6 @@ import {
   ParseIntPipe,
   DefaultValuePipe,
   UseGuards,
-  SetMetadata,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';

@@ -8,11 +8,11 @@ import {
 import { Reflector } from '@nestjs/core';
 import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
 import { AuthType } from 'src/auth/enums/auth-type-enum';
-import { AUTH_TYPR_KEY } from 'src/auth/constants/auth.constnts';
+import { AUTH_TYPE_KEY } from 'src/auth/constants/auth.constnts';
 
 @Injectable()
 export class AuthenticationtGuard implements CanActivate {
-  private static readonly deafultAuthType = AuthType.Bearer;
+  private static readonly defaultAuthType = AuthType.Bearer;
 
   private readonly authTypeGuardMap: Record<
     AuthType,
@@ -28,26 +28,20 @@ export class AuthenticationtGuard implements CanActivate {
     private readonly accessTokenGuard: AccessTokenGuard,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const authType = this.reflector.getAllAndOverride(AUTH_TYPR_KEY, [
+    const authType = this.reflector.getAllAndOverride(AUTH_TYPE_KEY, [
       context.getHandler(),
       context.getClass(),
-    ]) ?? [AuthenticationtGuard.deafultAuthType];
+    ]) ?? [AuthenticationtGuard.defaultAuthType];
 
-    console.log(authType);
 
     const guards = authType.map((type) => this.authTypeGuardMap[type]).flat();
-    console.log(guards);
 
     const error = new UnauthorizedException();
 
     for (const instance of guards) {
-      console.log('instance' , instance)
       const canActivate = await Promise.resolve(
         instance.canActivate(context),
-      ).catch((err) => {
-        error: err;
-      });
-      console.log('canActivate', canActivate);
+      ).catch(() => false);
       if (canActivate) {
         return true;
       }

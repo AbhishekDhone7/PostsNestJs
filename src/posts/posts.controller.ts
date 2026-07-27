@@ -28,6 +28,8 @@ import { ApiErrorResponseDto } from '../common/dtos/api-error-response.dto';
 import { DeleteOperationResponseDto } from '../common/dtos/operation-response.dto';
 import { PaginatedPostResponseDto } from './dtos/paginated-post-response.dto';
 import { PostResponseDto } from './dtos/post-response.dto';
+import { ActiveUser } from 'src/auth/decorator/active-user-data.decorator';
+import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 
 /** Public `/posts` controller. It delegates create, paginate, update, and delete operations to {@link PostsService}; no route guard is registered. */
 @Controller('posts')
@@ -143,8 +145,12 @@ export class PostsController {
     type: ApiErrorResponseDto,
   })
   @Post()
-  public createPost(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  public createPost(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser() user: ActiveUserData,
+  ) {
+    console.log(user);
+    // return this.postsService.create(createPostDto);
   }
 
   /**

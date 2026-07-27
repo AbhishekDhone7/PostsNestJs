@@ -158,17 +158,4 @@ export class CreatePostDto {
   @ValidateNested({ each: true })
   @Type(() => CreatePostMetaOptionsDto)
   metaOptions?: CreatePostMetaOptionsDto | null;
-
-  /** Required identifier of the user who authors the post. */
-  @ApiProperty({
-    type: 'integer',
-    required: true,
-    example: 1,
-    description: 'Identifier of the existing user who authors the post.',
-    minimum: 1,
-    nullable: false,
-  })
-  @IsNotEmpty()
-  @IsInt()
-  authorId: number;
 }

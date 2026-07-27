@@ -42,7 +42,7 @@ describe('logger utilities', () => {
 
     const command = createCurlCommand(request);
 
-    expect(command).toContain("curl --location 'http://localhost:3000/auth'");
+    expect(command).toContain("curl --location 'http://localhost:5000/auth'");
     expect(command).toContain('authorization: ********');
     expect(command).toContain('password": "********');
     expect(command).not.toContain('signed-token');
